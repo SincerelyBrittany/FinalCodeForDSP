@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: song-matcher-backend
+    env: python
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    plan: free
+    autoDeploy: true
+
+  - type: web
+    name: song-matcher-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    plan: free
+    autoDeploy: true
